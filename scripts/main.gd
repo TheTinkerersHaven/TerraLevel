@@ -8,11 +8,8 @@ func _ready():
 	var area = $Area2D
 	area.body_entered.connect(_on_body_entered)
 	
-	player = get_node("CharacterBody2D")
-	if not player:
-		print("Player not found")
-	else:
-		player.connect("died", Callable(self, "_on_player_died"))
+	player = $CharacterBody2D
+	$CharacterBody2D.connect("died", Callable(self, "_on_player_died"))
 	
 	previous_score = Globals.score;
 	
@@ -34,7 +31,6 @@ func _on_player_died() -> void:
 	else:
 		Globals.score -= 100
 	update_score_display()
-
 		
 func update_score_display():
 	var score_label := get_node("CanvasLayer/FadeLayer/Label")
